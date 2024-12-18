@@ -125,6 +125,19 @@ model CarpoolGroup {
   @@map(name: "group")
 }
 
+// model UserCarpoolGroup {
+//   id          String         @id @default(cuid())
+//   userId      String         // Foreign key to User
+//   groupId     String         // Foreign key to CarpoolGroup
+//   role        String         @default("member")
+//   joinDate    DateTime       @default(now())
+
+//   user        User           @relation(fields: [userId], references: [id])
+//   carpoolGroup CarpoolGroup  @relation(fields: [groupId], references: [id])
+
+//   @@unique([userId, groupId]) // Prevent duplicates
+// }
+
 // Represents a User--need this for NextAuth and the data it stores.
 model User {
   id                 String        @id @default(cuid()) // primary key
@@ -156,7 +169,7 @@ model User {
   startPOICoordLat   Float         @default(0) @map("start_poi_coord_lat")
   isOnboarded        Boolean       @default(false) @map("is_onboarded")
   licenseSigned      Boolean       @default(false) @map("license_signed")
-  daysWorking        String        @default("") @map("days_working")
+  daysWorking        String        @default("") @map("days_working") // change to UserWorkday[]
   startTime          DateTime?     @map("start_time") @db.Time(0)
   endTime            DateTime?     @map("end_time") @db.Time(0)
   coopStartDate      DateTime?     @map("coop_start_date") @db.Date
@@ -175,6 +188,27 @@ model User {
   @@index([carpoolId])
   @@map(name: "user")
 }
+
+// Represents a Day of the Week
+enum Weekday {
+  MONDAY
+  TUESDAY
+  WEDNESDAY
+  THURSDAY
+  FRIDAY
+  SATURDAY
+  SUNDAY
+}
+
+// model UserWorkday {
+//   id      String   @id @default(cuid())
+//   userId  String   // Foreign key to User
+//   day     Weekday  // Enum representing the day of the week
+
+//   user    User     @relation(fields: [userId], references: [id])
+
+//   @@unique([userId, day]) // Prevent duplicate entries for the same day
+// }
 
 // Represents a VerificationToken--need this for NextAuth.
 model VerificationToken {
