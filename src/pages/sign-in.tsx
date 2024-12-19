@@ -4,6 +4,7 @@ import React from "react";
 import Head from "next/head";
 import Header from "../components/Header";
 import { trackEvent } from "../utils/mixpanel";
+import DatingApp from "../components/DatingApp/DatingApp";
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const session = await getSession(context);
@@ -53,7 +54,8 @@ const SignIn: NextPage = () => {
 
   return (
     <>
-      <Head>
+      <DatingApp />
+      {/* <Head>
         <title>Sign In - NU Carpool</title>
       </Head>
 
@@ -73,7 +75,7 @@ const SignIn: NextPage = () => {
             </button>
           )}
         </div>
-      </div>
+      </div> */}
     </>
   );
 };

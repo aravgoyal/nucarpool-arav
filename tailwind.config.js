@@ -35,9 +35,14 @@ module.exports = {
             backgroundSize: "100% 100%, 120% 120%",
           },
         },
+        fadeOut: {
+          from: { opacity: "1" },
+          to: { opacity: "0" },
+        },
       },
       animation: {
         "gradient-shift-15s": "gradientShift 15s ease-in-out infinite",
+        "fade-out": "fadeOut 0.3s ease-out",
       },
       fontFamily: {
         montserrat: ["Montserrat", "sans-serif"],
